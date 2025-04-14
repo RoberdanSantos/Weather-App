@@ -15,9 +15,32 @@ datasource db {
 }
 
 model User {
+  id       String   @id @default(uuid())
+  email    String   @unique
+  password String
+  name     String
+  address  Address?
+  passwordResetTokens PasswordResetToken[]
+  createdAt DateTime @default(now())
+}
+
+model Address {
   id        String   @id @default(uuid())
-  email     String   @unique
-  password  String
-  name      String
+  userId    String   @unique
+  cep       String
+  street    String
+  number    String
+  neighborhood String
+  city      String
+  state     String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model PasswordResetToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
 }
