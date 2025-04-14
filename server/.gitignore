@@ -16,3 +16,4 @@ nyc_output
 
 **/.cache
 
+/generated
