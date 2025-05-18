@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -15,24 +14,48 @@ datasource db {
 }
 
 model User {
-  id       String   @id @default(uuid())
-  email    String   @unique
-  password String
-  name     String
-  address  Address?
+  id                  String   @id @default(uuid())
+  email               String   @unique
+  password            String
+  name                String
+  address             Address?
+  searchLogs          SearchLog[]  
+  recentCities        String[] @default([])
   passwordResetTokens PasswordResetToken[]
-  createdAt DateTime @default(now())
+  favoriteLocations   FavoriteLocation[]
+  createdAt           DateTime @default(now())
 }
 
 model Address {
-  id        String   @id @default(uuid())
-  userId    String   @unique
-  cep       String
-  street    String
-  number    String
+  id           String   @id @default(uuid())
+  userId       String   @unique
+  cep          String
+  street       String
+  number       String
   neighborhood String
-  city      String
-  state     String
+  city         String
+  state        String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model SearchLog {
+  id          String   @id @default(uuid())
+  userId      String
+  location    String
+  temperature Int
+  condition   String
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model FavoriteLocation {
+  id        String   @id @default(uuid())
+  userId    String
+  name      String
+  country   String
+  createdAt DateTime @default(now())
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
