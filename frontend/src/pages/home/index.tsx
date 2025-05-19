@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useAuthContext } from "@/context/AuthContext";
-import { useToast } from "@/context/ToastContext";
+import { useAuthContext } from "@/context/auth.context";
+import { useToast } from "@/context/toast-context";
 import axios from "axios";
 import { Search, MapPin, Heart } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -13,7 +13,7 @@ import { ThermalAmplitudeCard } from "./thermal-amplitude-card";
 import { AirQualityCard } from "./air-quality-card";
 import { WeatherAlertsCard } from "./weather-alert-card";
 import { SunTimesCard } from "./sum-times-card";
-import { calculateDayLength, formatUnixToTime } from "@/lib/timeFormats";
+import { calculateDayLength, formatUnixToTime } from "@/lib/time-formats";
 import { WeatherDetailsCard } from "./weather-details-card";
 import { LocationCard } from "./location-card";
 import {

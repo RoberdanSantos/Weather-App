@@ -1,4 +1,4 @@
-import { useAuthContext } from "@/context/AuthContext";
+import { useAuthContext } from "@/context/auth.context";
 import { Navigate } from "react-router-dom";
 import LandingPage from "@/pages/landing";
 import Home from "@/pages/home";
